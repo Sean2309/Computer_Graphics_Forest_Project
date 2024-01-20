@@ -11,18 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ini.c" />
+    <ClCompile Include="INIReader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="spline.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data.h" />
+    <ClInclude Include="ini.h" />
+    <ClInclude Include="INIReader.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="spline.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="banner.frag" />
     <None Include="banner.vert" />
+    <None Include="config.ini" />
     <None Include="explosion.frag" />
     <None Include="explosion.vert" />
     <None Include="lighting.frag" />

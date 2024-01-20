@@ -33,7 +33,7 @@ in vec2 texCoord;           // incoming texture coordinates
 uniform float time;         // time used for simulation of moving lights (such as sun)
 uniform Material material;  // current material
 
-uniform float fogDensity;   // density of fog
+
 
 uniform mat4 PVMmatrix;     // Projection * View * Model  --> model to clip coordinates
 uniform mat4 Vmatrix;       // View                       --> world to eye coordinates
@@ -44,7 +44,11 @@ uniform vec3 reflectorPosition;   // reflector position (world coordinates)
 uniform vec3 reflectorDirection;  // reflector direction (world coordinates)
 uniform vec3 campfireLoc;
 
+uniform float fogDensity;   // density of fog
 uniform int pointEnable;
+uniform vec3 pointLightPos; // vec3(0.0f, -0.5f, 0.05f)
+uniform vec3 pointLightAmbient;  // vec3(0.2f)
+uniform vec3 pointLightSpecular; // vec3(1.0f)
 
 smooth out vec2 texCoord_v;  // outgoing texture coordinates
 smooth out vec4 color_v;     // outgoing fragment color
@@ -186,10 +190,10 @@ void main() {
 
   if(pointEnable == 1) {
     //pointlight setup
-    point.position = vec3(0.0f, -0.5f, 0.05f ); // 
+    point.position = pointLightPos; // 
     point.diffuse = vec3(0.2f, 0.2f, 0.2f);
-    point.ambient = vec3(0.2f);
-    point.specular = vec3(1.0f);
+    point.ambient = pointLightAmbient;
+    point.specular = pointLightSpecular;
     point.attenuation = vec3(0.0f, 0.0f, 0.1f);
     outputColor += pointLight(point, material, vertexPosition, vertexNormal);
   }

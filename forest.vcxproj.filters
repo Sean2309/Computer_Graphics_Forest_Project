@@ -28,6 +28,12 @@
     <ClCompile Include="render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="INIReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ini.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="banner.frag">
@@ -49,6 +55,7 @@
     <None Include="lighting.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="config.ini" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="spline.h">
@@ -58,6 +65,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="INIReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ini.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

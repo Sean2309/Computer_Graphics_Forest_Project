@@ -134,6 +134,9 @@ typedef struct _commonShaderProgram {
   //pointlight
   GLint pointLightLoc;
   GLint campfireLocation;
+  GLint pointLightPosLoc;
+  GLint pointLightAmbientLoc;
+  GLint pointLightSpecularLoc;
 
   // fog
   GLint fogOnLinearLoc;

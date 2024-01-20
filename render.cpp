@@ -46,7 +46,7 @@ const char* PALMTREE_MODEL_NAME = "data/tree/Tree.obj";
 const char* CAMPFIRE_MODEL_NAME = "data/campfire/Campfire.obj";
 
 const char* EXPLOSION_TEXTURE_NAME = "data/explode.png";
-const char* BANNER_TEXTURE_NAME = "data/gameOver.png";
+const char* BANNER_TEXTURE_NAME = "data/gameOver.jpg";
 const char* SKYBOX_CUBE_TEXTURE_FILE_PREFIX = "data/skybox/skybox";
 
 
@@ -762,6 +762,10 @@ void initializeShaderPrograms(void) {
     //pointlight
     shaderProgram.pointLightLoc = glGetUniformLocation(shaderProgram.program, "pointEnable");
     shaderProgram.campfireLocation = glGetUniformLocation(shaderProgram.program, "campfireLoc");
+    shaderProgram.pointLightPosLoc = glGetUniformLocation(shaderProgram.program, "pointLightPos");
+    shaderProgram.pointLightAmbientLoc = glGetUniformLocation(shaderProgram.program, "pointLightAmbient");
+    shaderProgram.pointLightSpecularLoc = glGetUniformLocation(shaderProgram.program, "pointLightSpecular");
+
     // fog
     shaderProgram.fogOnLinearLoc = glGetUniformLocation(shaderProgram.program, "fogOnLinearToggle");
     shaderProgram.fogOnExpLoc = glGetUniformLocation(shaderProgram.program, "fogOnExpToggle");

@@ -8,7 +8,7 @@ in vec2 texCoord;           // incoming texture coordinates
 
 smooth out vec2 texCoord_v; // outgoing texture coordinates
 
-float decay = 0.03; // increasing this value will increase the banner speed
+float decay = 0.2; // increasing this value will increase the banner speed
 
 void main() {
 

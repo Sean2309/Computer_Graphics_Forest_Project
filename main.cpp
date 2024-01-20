@@ -15,8 +15,11 @@
 #include "render.h"
 #include "spline.h"
 #include "data.h"
+#include "INIReader.h"
+#include <unordered_map>
+#include <string>
 
-//----------------------------------------------------------------------------------------
+ //----------------------------------------------------------------------------------------
 // START OF INITIALIZING VARIABLES
 extern SCommonShaderProgram shaderProgram;
 extern bool useLighting;
@@ -70,15 +73,72 @@ struct GameObjects {
 
 
 int pointEnable = 0;
+glm::vec3 pointLightPos = glm::vec3(0.0f, -0.5f, 0.05f);
+glm::vec3 pointLightAmbient = glm::vec3(0.2f);
+glm::vec3 pointLightSpecular = glm::vec3(1.0f);
 
 bool fogLinearToggleInput = false;
 bool fogExpToggleInput = false;
 float fogNearValue = -0.5f;
 float fogDensityValue = 5.0f;
 
+
+
 // END OF INITIALIZING VARIABLES
 //----------------------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------------------
+// START OF CONFIG PARSING
+
+std::unordered_map<std::string, float> readConfig(const std::string& filename) {
+	INIReader reader(filename);
+	std::unordered_map<std::string, float> configValues;
+
+	if (reader.ParseError() < 0) {
+		std::cout << "Can't load " << filename << std::endl;
+		return configValues; // Returns an empty map if there's an error
+	}
+
+	// Reading cat configuration
+	configValues["Cat.position_x"] = reader.GetReal("Cat", "position_x", 0.15f);
+	configValues["Cat.position_y"] = reader.GetReal("Cat", "position_y", 0.65f);
+	configValues["Cat.position_z"] = reader.GetReal("Cat", "position_z", 0.12f);
+	configValues["Cat.size"] = reader.GetReal("Cat", "size", CAT_SIZE);
+
+	// Reading fern configuration
+	configValues["Fern.size"] = reader.GetReal("Fern", "size", FERN_SIZE);
+
+	// Reading campfire configuration
+	configValues["Campfire.size"] = reader.GetReal("Campfire", "size", CAMPFIRE_SIZE);
+
+	return configValues;
+}
+
+void reloadConfig() {
+	// Read the configuration
+	auto configValues = readConfig("config.ini");
+
+	// Update game objects based on the new configuration
+	// Similar to how you handle it in the restartGame function
+	// For example, updating the cat object:
+	if (gameObjects.cat != NULL) {
+		gameObjects.cat->size = configValues["Cat.size"];
+		gameObjects.cat->position = glm::vec3(
+			configValues["Cat.position_x"],
+			configValues["Cat.position_y"],
+			configValues["Cat.position_z"]
+		);
+	}
+
+	gameObjects.fern1->size = configValues["Fern.size"];
+	gameObjects.fern2->size = configValues["Fern.size"];
+
+	gameObjects.campfire->size = configValues["Cat.size"];
+}
+
+
+// END OF CONFIG PARSING
+// ---------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------
 // START OF COLLISION HELPER FUNCTIONS
@@ -227,14 +287,28 @@ void cleanUpObjects(void) {
 	}
 }
 
+bool checkValiditySize(float size) {
+    return size > 0.1f && size < 2.0f;
+}
+
+bool checkValidityPosition(const glm::vec3& position) {
+    return position.x >= -1.0f && position.x <= 1.0f &&
+           position.y >= -1.0f && position.y <= 1.0f &&
+           position.z >= -1.0f && position.z <= 1.0f;
+}
+
 void restartGame(void) {
 
 	cleanUpObjects();
 
+	// Constant Values
 	fogLinearToggleInput = false;
 	fogExpToggleInput = false;
 	fogNearValue = -0.5f;
 	fogDensityValue = 0.1f;
+
+    // Read the configuration
+    auto configValues = readConfig("config.ini");
 
 	gameState.elapsedTime = 0.001f * (float)glutGet(GLUT_ELAPSED_TIME); // milliseconds => seconds
 
@@ -270,10 +344,22 @@ void restartGame(void) {
 
 	// init cat
 	if (gameObjects.cat == NULL)
-		gameObjects.cat = new CatObject;
+        gameObjects.cat = new CatObject;
+	glm::vec3 tempCatPos = glm::vec3(
+		configValues["Cat.position_x"],
+		configValues["Cat.position_y"],
+		configValues["Cat.position_z"]
+	);
 
-	gameObjects.cat->position = glm::vec3(0.15f, 0.65f, 0.12f);
-	gameObjects.cat->size = CAT_SIZE;
+    // Using the values from the config
+	if (checkValiditySize(configValues["Cat.size"]) && (checkValidityPosition(tempCatPos))) {
+		gameObjects.cat->size = configValues["Cat.size"];
+		gameObjects.cat->position = tempCatPos;
+	}
+	else {
+		gameObjects.cat->size = CAT_SIZE;
+		gameObjects.cat->position = glm::vec3(0.15, 0.65, 0.12);
+	}
 
 	// init rock
 	if (gameObjects.rock == NULL)
@@ -324,13 +410,26 @@ void restartGame(void) {
 		gameObjects.fern1 = new FernObject;
 
 	gameObjects.fern1->position = glm::vec3(0.35f, 0.0f, -0.00005f);
-	gameObjects.fern1->size = FERN_SIZE;
+
+	if (checkValiditySize(configValues["Fern.size"])) {
+		gameObjects.fern1->size = configValues["Fern.size"];
+	}
+	else {
+		gameObjects.fern1->size = FERN_SIZE;
+	}
+	
 
 	if (gameObjects.fern2 == NULL)
 		gameObjects.fern2 = new FernObject;
 
 	gameObjects.fern2->position = glm::vec3(0.35f, -0.3f, -0.00005f);
-	gameObjects.fern2->size = FERN_SIZE;
+
+	if (checkValiditySize(configValues["Fern.size"])) {
+		gameObjects.fern2->size = configValues["Fern.size"];
+	}
+	else {
+		gameObjects.fern2->size = FERN_SIZE;
+	}
 
 	if (gameObjects.fern3 == NULL)
 		gameObjects.fern3 = new FernObject;
@@ -349,7 +448,7 @@ void restartGame(void) {
 		gameObjects.campfire = new CampfireObject;
 
 	gameObjects.campfire->position = glm::vec3(0.0f, -0.5f, 0.05f);
-	gameObjects.campfire->size = CAMPFIRE_SIZE;
+	gameObjects.campfire->size = configValues["Campfire.size"];
 	gameObjects.campfire->destroyed = false;
 
 	// init block
@@ -624,6 +723,9 @@ void drawWindowContents() {
 	glUniform3fv(shaderProgram.reflectorDirectionLocation, 1, glm::value_ptr(gameObjects.penguin->direction)); // light facing direction
 
 	glUniform1i(shaderProgram.pointLightLoc, pointEnable);
+	glUniform3fv(shaderProgram.pointLightPosLoc, 1, glm::value_ptr(pointLightPos));
+	glUniform3fv(shaderProgram.pointLightAmbientLoc, 1, glm::value_ptr(pointLightAmbient));
+	glUniform3fv(shaderProgram.pointLightSpecularLoc, 1, glm::value_ptr(pointLightSpecular));
 
 	glUniform1f(shaderProgram.fogOnLinearLoc, fogLinearToggleInput);
 	glUniform1f(shaderProgram.fogOnExpLoc, fogExpToggleInput);
@@ -894,10 +996,7 @@ void timerCallback(int) {
 	}
 	if (gameState.keyMap[KEY_E] == true)
 		decreaseBirdHeight();
-
-	if (gameState.keyMap[KEY_P] == true) {
-		
-	}
+	
 
 	// if (gameState.keyMap[KEY_EXPLODE1] == true){
 	// 	GameObjectsList::iterator it = gameObjects.aircraft.begin();
@@ -1054,6 +1153,13 @@ void keyboardCallback(unsigned char keyPressed, int mouseX, int mouseY) {
 		std::cout << "point enable : " << pointEnable << std::endl;
 		break;
 	}
+	case 'o': {
+		std::cout << "Reloading config file" << std::endl;
+		gameState.keyMap[KEY_O] = true;
+		reloadConfig();
+		break;
+	}
+
 	default:
 		; // printf("Unrecognized key pressed\n");
 	}
@@ -1089,6 +1195,11 @@ void keyboardUpCallback(unsigned char keyReleased, int mouseX, int mouseY) {
 		gameState.keyMap[KEY_P] = false;
 		break;
 	}
+	case 'o': {
+		gameState.keyMap[KEY_O] = false;
+		break;
+	}
+
 	default:
 		; // printf("Unrecognized key released\n");
 	}
