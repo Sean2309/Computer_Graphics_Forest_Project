@@ -1,0 +1,17 @@
+﻿cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  spline.cpp
+  render.cpp
+C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\data.h(332,1): warning C4305: 'initializing': truncation from 'double' to 'const float'
+C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\render.cpp(1058,28): warning C4244: '=': conversion from 'float' to 'GLuint', possible loss of data
+  main.cpp
+C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\data.h(332,1): warning C4305: 'initializing': truncation from 'double' to 'const float'
+C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\main.cpp(376,30): warning C4805: '==': unsafe mix of type 'int' and type 'bool' in operation
+  Generating Code...
+C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\main.cpp(449): warning C4715: 'checkTreeCollisions': not all control paths return a value
+main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+pgrd.lib(gl_core_4_4.obj) : warning LNK4099: PDB 'pgr-lib.pdb' was not found with 'pgrd.lib(gl_core_4_4.obj)' or at 'C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\Debug\pgr-lib.pdb'; linking object as if no debug info
+pgrd.lib(gldebug.obj) : warning LNK4099: PDB 'pgr-lib.pdb' was not found with 'pgrd.lib(gldebug.obj)' or at 'C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\Debug\pgr-lib.pdb'; linking object as if no debug info
+pgrd.lib(Image.obj) : warning LNK4099: PDB 'pgr-lib.pdb' was not found with 'pgrd.lib(Image.obj)' or at 'C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\Debug\pgr-lib.pdb'; linking object as if no debug info
+pgrd.lib(pgr.obj) : warning LNK4099: PDB 'pgr-lib.pdb' was not found with 'pgrd.lib(pgr.obj)' or at 'C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\Debug\pgr-lib.pdb'; linking object as if no debug info
+pgrd.lib(Shader.obj) : warning LNK4099: PDB 'pgr-lib.pdb' was not found with 'pgrd.lib(Shader.obj)' or at 'C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\Debug\pgr-lib.pdb'; linking object as if no debug info
+  forest.vcxproj -> C:\SUTD\Term_6_Exchange\Computer Graphics\Project\Computer_Graphics_Forest_Project\Debug\Forest Scene.exe
