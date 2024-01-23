@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- ************************************************************************************** -->
+<!-- * Web page template for the individual student project from Computer graphics course * -->
+<!-- * Verze: 2.00.20100228 | XHTML 1.0 Valid | CSS 2.1 Valid                             * -->
+<!-- * Autor: Miro Mikšík, Petr Felkel                                                    * -->
+<!-- ************************************************************************************** -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <!-- ********** Fill in your name! ********** -->
+ <title>Sean Phay; Individual project from the BE0M39PGR course</title>
+ <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+ <link rel="shortcut icon" href="../../img/favicon.ico" />
+ <link rel="stylesheet" type="text/css" href="https://cent.felk.cvut.cz/courses/EPGR/css/template_BE0M39PGR.css" />
+</head><body>
+ <div class="page">
+  <div class="header" id="header">
+   <h1 class="hidden">Individual project from the BE0M39PGR course</h1>
+   <hr class="hidden" />
+  </div>
+  <div class="left"><div class="right"><div class="main">
+
+   <!-- ********** Fill in the project name ********** -->
+   <h2 class="project">Forest Scene</h2>
+
+   <!-- ********** Fill in your name ********** -->
+   <h3 class="author">Sean Phay</h3>
+
+   <!-- ********** Create 3 different screenshots (screenshot1.png – screenshot3.png) and previews for them (thumb1.png – thumb3.png, resolution 300×250 pixels). We suggest to use the PNG (or JPEG) file format to store all images. Do not use file formats like BMP or TIFF! ********** -->
+   <div class="screenshots">
+
+    <!-- change the resolution of the ss -->
+    <a href="img/screenshot1.png"><img class="screenshot" src="img/thumb1.png" alt="Screenshot #1" /></a>  
+    <a href="img/screenshot2.png"><img class="screenshot" src="img/thumb2.png" alt="Screenshot #2" /></a>
+    <a href="img/screenshot3.png"><img class="screenshot" src="img/thumb3.png" alt="Screenshot #3" /></a>
+   </div>
+
+   <h4>Project description</h4>
+   <p>
+    <!-- ********** Fill in the project description ********** -->
+    The project was an interesting project to take on. I created a Forest-like scene that features a few different objects, such as ferns, trees, a campfire and a few animals. Several camera positions are available in the scene. The First-Person View is mounted on a Penguin object. 2 other static views are also available. <br><br>
+
+    In terms of interactive elements, there are 2 main ones. Firstly, if any of the fern objects are left-clicked, an explosive animation will be triggered. Secondly, since a campfire is dangerous, running into it will cause the game to be over. An explosive animation will also be triggered. <br><br>
+
+    The project was a great learning experience. I learned how to use the Assimp library to load in 3D models. I also learned how to use the GLM library to perform matrix transformations. I also learned how to use the stb_image library to load in textures.
+   </p>
+
+   <h4>Control keys</h4>
+   <p>
+    <!-- ********** Fill in description of all control keys, shortcut keys, and mouse gestures ********** -->
+    All application control keys (shortcut keys) have to be listed here together with brief description of their functionality.
+
+    <h4>The keyboard controls are as follows :</h4>
+    <ol>
+        <li><strong>W</strong> : Move forward.</li>
+        <li><strong>S</strong> : Move backward.</li>
+        <li><strong>A</strong> : Turn left.</li>
+        <li><strong>D</strong> : Turn right.</li>
+        <li><strong>Q</strong> : Move down (Negative z-direction).</li>
+        <li><strong>E</strong> : Move up (Positive z-direction).</li>
+        <li><strong>R</strong> : Restart Game and all Objects.</li>
+        <li><strong>P</strong> : Toggle Point Light On/Off.</li>
+        <li><strong>C</strong> : Change Camera.</li>
+        <li><strong>O</strong> : Reload Config file.</li>
+        <li><strong>ESC</strong> : Exit Game.</li>
+    </ol>
+
+    <h4>The mouse controls are as follows :</h4>
+    <ol>
+        <li><strong>Left Click</strong> : Click onto objects. Explosion is created if any Fern objects are clicked.</li>
+        <li><strong>Right Click</strong> : Open menu.</li>
+    </ol>
+   </p>
+
+   <h4>Download</h4>
+   <ul>
+    <!-- ********** Select a proper filename: „src.zip“ for Windows, „src.tgz“ for Linux ********** -->
+    <li><a href="code/SourceCode.zip">Source code</a></li>
+    <!-- ********** Select a proper filename: „windows.zip“ for Windows, „linux.tgz“ for Linux ********** -->
+    <li><a href="code/ExecutableVersion.zip">Executable version</a></li>
+   </ul>
+
+  </div></div></div>
+  <div class="footer"><hr class="hidden" />
+   <div class="footer_inner">Last modified:
+    <!-- ********** Update date of the last web page modification ********** -->
+    <!-- #BeginDate format:Ge1 -->17.08.2010<!-- #EndDate -->
+   </div>
+  </div>
+ </div>
+</body>
+</html>

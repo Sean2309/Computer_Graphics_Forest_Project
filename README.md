@@ -2,6 +2,8 @@
 
 The project was an interesting project to take on. I created a Forest-like scene that features a few different objects, such as ferns, trees, a campfire and a few animals. Several camera positions are available in the scene. The First-Person View is mounted on a Penguin object. 2 other static views are also available. 
 
+In terms of interactive elements, there are 2 main ones. Firstly, if any of the fern objects are left-clicked, an explosive animation will be triggered. Secondly, since a campfire is dangerous, running into it will cause the game to be over. An explosive animation will also be triggered.
+
 The project was a great learning experience. I learned how to use the Assimp library to load in 3D models. I also learned how to use the GLM library to perform matrix transformations. I also learned how to use the stb_image library to load in textures.
 
 --- 

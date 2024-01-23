@@ -1033,7 +1033,7 @@ void initBlockGeometry(SCommonShaderProgram& shader, MeshGeometry** geometry) {
     glBindBuffer(GL_ARRAY_BUFFER, (*geometry)->vertexBufferObject);
     glBufferData(GL_ARRAY_BUFFER, sizeof(blockVertices), blockVertices, GL_STATIC_DRAW);
 
-    // Generate Element Buffer Object (EBO) and fill it with coneIndices data
+    // Generate Element Buffer Object (EBO) and fill it with blockIndices data
     glGenBuffers(1, &((*geometry)->elementBufferObject));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, (*geometry)->elementBufferObject);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(unsigned int) * blockTrianglesCount, blockIndices, GL_STATIC_DRAW);
